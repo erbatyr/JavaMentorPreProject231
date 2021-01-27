@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users main site</title>
+</head>
+<body>
+    <table>
+        <thead>
+        <th>id</th>
+        <th>firstname</th>
+        <th>lastname</th>
+        <th>email</th>
+        <th>login</th>
+        <th>edit</th>
+        <th>delete</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td><p th:text="${user.getId()}"></p></td>
+                <td><p th:text="${user.getFirstName()}"></p></td>
+                <td><p th:text="${user.getLastName()}"></p></td>
+                <td><p th:text="${user.getEmail()}"></p></td>
+                <td><a th:href="@{/user/{id}(id=${user.getId()})}"><p th:text="${user.getLogin()}"></p></a></td>
+                <td><a th:href="@{/user/{id}/edit(id=${user.getId()})}">Edit</a></td>
+                <td><a th:href="@{/user/{id}/delete(id=${user.getId()})}">Delete</a></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users main site</title>
+</head>
+<body>
+    <form th:action="'/crud_app_war_exploded/user/'+${user.getId()}+'/delete'" method="post">
+        <p>Are you sure want to delete this User: <span th:text="${user.getLogin()}"/></p>
+        <button th:href="'/crud_app_war_exploded/user/'+${user.getId()}+'/delete'" type="submit">Delete</button>
+    </form>
+</body>
+</html>
