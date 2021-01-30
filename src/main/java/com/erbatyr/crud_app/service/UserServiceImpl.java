@@ -1,7 +1,6 @@
 package com.erbatyr.crud_app.service;
 
 import com.erbatyr.crud_app.dao.UserDAO;
-import com.erbatyr.crud_app.dao.UserDAOImpl;
 import com.erbatyr.crud_app.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

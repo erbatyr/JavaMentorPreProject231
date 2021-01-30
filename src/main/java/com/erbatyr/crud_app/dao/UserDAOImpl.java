@@ -1,50 +1,43 @@
 package com.erbatyr.crud_app.dao;
 
 import com.erbatyr.crud_app.model.User;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 public class UserDAOImpl implements UserDAO{
 
-    private SessionFactory sessionFactory;
-
-    @Autowired
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public List<User> userList() {
-        Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from User").list();
+        List<User> users = entityManager.createQuery("select user from User user", User.class).getResultList();
+        return users;
     }
 
     @Override
     public void addUser(User user) {
-        Session session = sessionFactory.getCurrentSession();
-        session.persist(user);
+        entityManager.persist(user);
     }
 
     @Override
     public void deleteUser(User user) {
-        Session session = sessionFactory.getCurrentSession();
-        session.delete(user);
+        entityManager.remove(entityManager.find(User.class, user.getId()));
     }
 
     @Override
     public void editUser(User user) {
-        Session session = sessionFactory.getCurrentSession();
-        session.update(user);
+        entityManager.merge(user);
     }
 
     @Override
     public User getUserById(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        return session.get(User.class, id);
+        User user = entityManager.find(User.class, id);
+        entityManager.detach(user);
+        return user;
     }
 }
